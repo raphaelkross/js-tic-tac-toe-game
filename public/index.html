@@ -148,7 +148,7 @@
 var game_id;
 
 $('#new-game').click(function() {
-  $.post( "game")
+  $.post( "/api/v1/game")
     .done(function(resp) {
       if (resp.Error) {
 	alert(resp.Error);
