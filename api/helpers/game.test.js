@@ -1,7 +1,7 @@
 const GameHelpers = require("./game");
 
 describe("Game Helpers", () => {
-  it("should return false if game is not complete", () => {
+  it("should return empty if game is not complete", () => {
     // ["", "", "", "", "", "", "", "", ""]
     const game = ["", "", "X", "", "O", "", "", "", ""];
     expect(GameHelpers.getGameStatus(game)).toBe("");

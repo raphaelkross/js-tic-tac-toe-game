@@ -62,11 +62,6 @@ module.exports = {
     // Check if empty cells on the game.
     const isThereEmptyCells = game.find((cell) => cell === "");
 
-    // There's still game to go...
-    if (isThereEmptyCells === "") {
-      return "";
-    }
-
     const isXWinner = checkWinner("X", game);
     const isOWinner = checkWinner("O", game);
 
@@ -79,6 +74,11 @@ module.exports = {
     }
 
     // Tie.
-    return "-";
+    if (!isOWinner && !isXWinner && isThereEmptyCells != "") {
+      return "-";
+    }
+
+    // Return empty, game to go...
+    return "";
   },
 };

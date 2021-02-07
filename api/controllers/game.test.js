@@ -216,4 +216,24 @@ describe("Game controller", () => {
 
     done();
   });
+
+  it("should return occupied cell when move into an occupied cell", async (done) => {
+    // Sends GET Request to /test endpoint
+    const res = await request.post("/api/v1/move").send({
+      id: 77,
+      subgame: 0,
+      cell: 0,
+    });
+
+    const { status, body } = res;
+
+    const expected = {
+      Error: "Occupied cell",
+    };
+
+    expect(status).toBe(200);
+    expect(body).toStrictEqual(expected);
+
+    done();
+  });
 });
