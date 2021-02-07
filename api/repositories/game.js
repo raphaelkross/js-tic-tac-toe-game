@@ -3,14 +3,18 @@
  */
 
 class GameRepository {
-  constructor() {
+  constructor(intialGames) {
     // Store latest game ID.
     this.latestGameID = 0;
     // Store each game into a key.
-    this.games = {};
+    this.games = intialGames ? intialGames : {};
   }
 
   findOne(id) {
+    if (!this.games.hasOwnProperty(id)) {
+      return false;
+    }
+
     return this.games[id];
   }
 

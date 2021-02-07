@@ -33,11 +33,40 @@ class GameService {
   get(id) {
     const game = this.gameRepository.findOne(id);
 
+    if (!game) {
+      return this.generateError("Invalid id");
+    }
+
     return game;
   }
 
   move(id, subgame, cell) {
     const game = this.gameRepository.findOne(id);
+
+    // Is a valid game?
+    if (!game) {
+      return this.generateError("Invalid id");
+    }
+
+    // Is a valid range of subgame?
+    if (subgame < 0 || subgame > 8) {
+      return this.generateError("Invalid subgame");
+    }
+
+    // Is a valid range of cell?
+    if (cell < 0 || cell > 8) {
+      return this.generateError("Invalid subgame");
+    }
+
+    // Is the movement to the correct subgame?
+    if (!game.valid_subgames.includes(subgame)) {
+      return this.generateError("Invalid move");
+    }
+
+    // Is the destination cell NOT occupied?
+    if (game.board[subgame][cell] != "") {
+      return this.generateError("Occupied cell");
+    }
 
     // Get turn.
     const turn = game.turn;
@@ -61,6 +90,12 @@ class GameService {
     });
 
     return this.gameRepository.update(id, movedGame);
+  }
+
+  generateError(msg) {
+    return {
+      Error: msg,
+    };
   }
 }
 

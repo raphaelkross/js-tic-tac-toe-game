@@ -24,7 +24,11 @@ class GameController {
   move(req, res) {
     const { id, subgame, cell } = req.body;
 
-    const movedGame = this.gameService.move(id, subgame, cell);
+    const movedGame = this.gameService.move(
+      parseInt(id),
+      parseInt(subgame),
+      parseInt(cell)
+    );
 
     res.status(200).json(movedGame);
   }
