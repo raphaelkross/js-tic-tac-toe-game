@@ -10,11 +10,11 @@ class GameRepository {
     this.games = {};
   }
 
-  get(id) {
+  findOne(id) {
     return this.games[id];
   }
 
-  save(game) {
+  create(game) {
     const gameWithID = Object.assign({}, game, {
       id: this.latestGameID,
     });
@@ -24,6 +24,12 @@ class GameRepository {
     this.latestGameID++;
 
     return gameWithID;
+  }
+
+  update(id, game) {
+    this.games = Object.assign(this.games, { [id]: game });
+
+    return this.findOne(id);
   }
 }
 

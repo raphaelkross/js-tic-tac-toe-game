@@ -12,6 +12,22 @@ class GameController {
 
     res.status(200).json(newGame);
   }
+
+  get(req, res) {
+    const { id } = req.query;
+
+    const game = this.gameService.get(id);
+
+    res.status(200).json(game);
+  }
+
+  move(req, res) {
+    const { id, subgame, cell } = req.body;
+
+    const movedGame = this.gameService.move(id, subgame, cell);
+
+    res.status(200).json(movedGame);
+  }
 }
 
 module.exports = GameController;

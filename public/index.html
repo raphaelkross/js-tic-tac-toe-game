@@ -165,7 +165,7 @@ $('.cell').click(function() {
     subgame: $(this).parent().data('subgame'),
     cell: $(this).data('cell')
   };
-  $.post( "move", json)
+  $.post( "api/v1/move", json)
     .done(function(resp) {
       if (resp.Error) {
 	alert(resp.Error);
