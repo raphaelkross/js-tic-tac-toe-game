@@ -16,6 +16,11 @@ describe("Game Helpers", () => {
     expect(GameHelpers.getGameStatus(game2)).toBe("X");
     expect(GameHelpers.getGameStatus(game3)).toBe("X");
   });
+  it("should return [Player] if partial game is won by [Player]", () => {
+    const game = ["X", "X", "X", "O", "X", "", "O", "", ""];
+
+    expect(GameHelpers.getGameStatus(game)).toBe("X");
+  });
   it("should return [Player] if game is vertically won by [Player]", () => {
     const game = ["O", "X", "O", "O", "X", "O", "O", "O", "X"];
     const game2 = ["O", "X", "O", "O", "X", "X", "X", "X", "O"];

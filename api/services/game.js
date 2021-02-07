@@ -2,6 +2,8 @@
  * Manage Games.
  */
 
+const GameHelpers = require("../helpers/game");
+
 class GameService {
   constructor(gameRepository) {
     this.gameRepository = gameRepository;
@@ -79,15 +81,20 @@ class GameService {
     // Change turn;
     const newTurn = turn == "X" ? "O" : "X";
 
-    // Valid subgame.
-    const validSubgames = [cell];
-
     // Make new game.
     const movedGame = Object.assign({}, game, {
       board: board,
       turn: newTurn,
-      valid_subgames: validSubgames,
     });
+
+    // Valid subgame
+    let validSubgames = [cell];
+
+    if (GameHelpers.getGameStatus(game.board[cell]) != "") {
+      validSubgames = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    }
+
+    movedGame.valid_subgames = validSubgames;
 
     return this.gameRepository.update(id, movedGame);
   }

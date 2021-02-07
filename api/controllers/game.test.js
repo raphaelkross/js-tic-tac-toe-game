@@ -217,22 +217,20 @@ describe("Game controller", () => {
     done();
   });
 
-  it("should return occupied cell when move into an occupied cell", async (done) => {
+  it("should return all valid_subgames when move into an won game", async (done) => {
     // Sends GET Request to /test endpoint
     const res = await request.post("/api/v1/move").send({
-      id: 77,
+      id: 78,
       subgame: 0,
-      cell: 0,
+      cell: 1,
     });
 
     const { status, body } = res;
 
-    const expected = {
-      Error: "Occupied cell",
-    };
+    const expected = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
     expect(status).toBe(200);
-    expect(body).toStrictEqual(expected);
+    expect(body.valid_subgames).toStrictEqual(expected);
 
     done();
   });
