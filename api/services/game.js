@@ -96,6 +96,16 @@ class GameService {
 
     movedGame.valid_subgames = validSubgames;
 
+    // Check winner before saving.
+    const superTicTacToeBoard = movedGame.board.map((board) =>
+      GameHelpers.getGameStatus(board)
+    );
+    const theWinner = GameHelpers.getGameStatus(superTicTacToeBoard);
+
+    if (theWinner != "") {
+      movedGame.winner = theWinner;
+    }
+
     return this.gameRepository.update(id, movedGame);
   }
 

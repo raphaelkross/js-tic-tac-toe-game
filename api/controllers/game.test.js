@@ -234,4 +234,20 @@ describe("Game controller", () => {
 
     done();
   });
+
+  it("should return winner = true when you won 3 tic tac toe games in a row", async (done) => {
+    // Sends GET Request to /test endpoint
+    const res = await request.post("/api/v1/move").send({
+      id: 79,
+      subgame: 0,
+      cell: 0,
+    });
+
+    const { status, body } = res;
+
+    expect(status).toBe(200);
+    expect(body.winner).toStrictEqual("X");
+
+    done();
+  });
 });
